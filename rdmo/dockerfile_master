@@ -20,7 +20,10 @@ RUN apt install -y \
     libxslt-dev \
     zlib1g-dev \
     procps \
-    vim
+    vim \
+    python3-ldap \
+    python-django-auth-ldap \
+    libsasl2-dev libldap2-dev libssl-dev
 
 # postgres
 RUN apt install -y \

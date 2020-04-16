@@ -112,27 +112,27 @@ AUTHENTICATION_BACKENDS.append('allauth.account.auth_backends.AuthenticationBack
 LDAP, see also:
 http://rdmo.readthedocs.io/en/latest/configuration/authentication/ldap.html
 '''
-# import ldap
-# from django_auth_ldap.config import LDAPSearch
-# from rdmo.core.settings import AUTHENTICATION_BACKENDS
-#
-# PROFILE_UPDATE = False
-#
-# AUTH_LDAP_SERVER_URI = "ldap://ldap.example.com"
-# AUTH_LDAP_BIND_DN = "cn=admin,dc=ldap,dc=example,dc=com"
-# AUTH_LDAP_BIND_PASSWORD = "admin"
-# AUTH_LDAP_USER_SEARCH = LDAPSearch("dc=ldap,dc=example,dc=com", ldap.SCOPE_SUBTREE, "(uid=%(user)s)")
-#
-# AUTH_LDAP_USER_ATTR_MAP = {
-#     "first_name": "givenName",
-#     "last_name": "sn",
-#     'email': 'mail'
-# }
-#
-# AUTHENTICATION_BACKENDS.insert(
-#     AUTHENTICATION_BACKENDS.index('django.contrib.auth.backends.ModelBackend'),
-#     'django_auth_ldap.backend.LDAPBackend'
-# )
+import ldap
+from django_auth_ldap.config import LDAPSearch
+from rdmo.core.settings import AUTHENTICATION_BACKENDS
+
+PROFILE_UPDATE = False
+
+AUTH_LDAP_SERVER_URI = "ldaps://it-ldap-slave.desy.de:1636"
+AUTH_LDAP_BIND_DN = "uid=library1,ou=people,ou=rgy,o=desy,c=de"
+AUTH_LDAP_BIND_PASSWORD = os.environ["AUTH_LDAP_BIND_PASSWORD"]
+AUTH_LDAP_USER_SEARCH = LDAPSearch("ou=RGY,o=DESY,c=DE", ldap.SCOPE_SUBTREE, "(uid=%(user)s)")
+
+AUTH_LDAP_USER_ATTR_MAP = {
+    "first_name": "givenName",
+    "last_name": "sn",
+    'email': 'mail'
+}
+
+AUTHENTICATION_BACKENDS.insert(
+    AUTHENTICATION_BACKENDS.index('django.contrib.auth.backends.ModelBackend'),
+    'django_auth_ldap.backend.LDAPBackend'
+)
 
 '''
 Shibboleth, see also:
