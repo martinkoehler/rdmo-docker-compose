@@ -14,7 +14,7 @@ DEBUG = False
 A secret key for a particular Django installation. This is used to provide
 cryptographic signing, and should be set to a unique, unpredictable value.
 '''
-SECRET_KEY = 'this is not a very secret key'
+SECRET_KEY = 'aKqKT1xyvxG8Wq99TUzbfYmOZjObeFWLMZwLtHsdasU6WBsBa1cCQVR0XW1p'
 
 '''
 The list of URLs under which this application is available
@@ -74,14 +74,14 @@ DATABASES = {
 E-Mail configuration, see also:
 http://rdmo.readthedocs.io/en/latest/configuration/email.html
 '''
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'localhost'
-# EMAIL_PORT = '25'
-# EMAIL_HOST_USER = ''
-# EMAIL_HOST_PASSWORD = ''
-# EMAIL_USE_TLS = False
-# EMAIL_USE_SSL = False
-# DEFAULT_FROM_EMAIL = ''
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp-auth.desy.de'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'library1'
+EMAIL_HOST_PASSWORD = os.environ["AUTH_LDAP_BIND_PASSWORD"]
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+DEFAULT_FROM_EMAIL = 'library@desy.de'
 
 '''
 Allauth configuration, see also:
@@ -90,8 +90,8 @@ http://rdmo.readthedocs.io/en/latest/configuration/authentication/allauth.html
 
 from rdmo.core.settings import INSTALLED_APPS, AUTHENTICATION_BACKENDS
 
-ACCOUNT = True
-ACCOUNT_SIGNUP = True
+ACCOUNT = False
+ACCOUNT_SIGNUP = False
 ACCOUNT_TERMS_OF_USE = True
 SOCIALACCOUNT = False
 
@@ -166,39 +166,39 @@ http://rdmo.readthedocs.io/en/latest/configuration/authentication/shibboleth.htm
 Theme, see also:
 http://rdmo.readthedocs.io/en/latest/configuration/themes.html
 '''
-# THEME_DIR = os.path.join(BASE_DIR, 'theme')
+THEME_DIR = os.path.join(BASE_DIR, 'theme')
 
 '''
 Export Formats
 '''
-# from django.utils.translation import ugettext_lazy as _
-# EXPORT_FORMATS = (
-#     ('pdf', _('PDF')),
-#     ('rtf', _('Rich Text Format')),
-#     ('odt', _('Open Office')),
-#     ('docx', _('Microsoft Office')),
-#     ('html', _('HTML')),
-#     ('markdown', _('Markdown')),
-#     ('mediawiki', _('mediawiki')),
-#     ('tex', _('LaTeX'))
-# )
+from django.utils.translation import ugettext_lazy as _
+EXPORT_FORMATS = (
+    ('pdf', _('PDF')),
+    ('rtf', _('Rich Text Format')),
+    ('odt', _('Open Office')),
+    ('docx', _('Microsoft Office')),
+    ('html', _('HTML')),
+    ('markdown', _('Markdown')),
+    ('mediawiki', _('mediawiki')),
+    ('tex', _('LaTeX'))
+)
 
 '''
 Cache, see also:
 http://rdmo.readthedocs.io/en/latest/configuration/cache.html
 '''
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-#         'LOCATION': '127.0.0.1:11211',
-#         'KEY_PREFIX': 'rdmo_default'
-#     },
-#     'api': {
-#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-#         'LOCATION': '127.0.0.1:11211',
-#         'KEY_PREFIX': 'rdmo_api'
-#     },
-# }
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+        'KEY_PREFIX': 'rdmo_default'
+    },
+    'api': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+        'KEY_PREFIX': 'rdmo_api'
+    },
+}
 
 '''
 LOGGING

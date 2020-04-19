@@ -23,7 +23,8 @@ RUN apt install -y \
     vim \
     python3-ldap \
     python-django-auth-ldap \
-    libsasl2-dev libldap2-dev libssl-dev
+    libsasl2-dev libldap2-dev libssl-dev \
+    memcached
 
 # postgres
 RUN apt install -y \

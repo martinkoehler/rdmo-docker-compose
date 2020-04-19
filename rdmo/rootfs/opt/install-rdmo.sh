@@ -12,9 +12,11 @@ pip install rdmo
 
 git clone ${RDMO_APP_REPO} ${RDMO_APP}
 cp -f /conf/template_local.py ${RDMO_APP}/config/settings/local.py
+cp -r /theme ${RDMO_APP}/theme
 
 pip install -r ${RDMO_APP}/requirements/gunicorn.txt
 pip install -r ${RDMO_APP}/requirements/ldap.txt
+pip install -r ${RDMO_APP}/requirements/memcached.txt
 
 cd ${RDMO_APP}
 python manage.py makemigrations
